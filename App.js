@@ -1,67 +1,33 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import {
-  Button,
-  InputView,
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import Hello from './Hello.js';
+import reducer from './reducer.js';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+// Storeにstateを保持。(初期状態)
+const store = createStore(reducer);
 
-type Props = {};
-export default class App extends Component<Props> {
-  constructor(props) {
-    super(props);
-    this.state = {num: 0}
-  }
-
+class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Button style={styles.button} title={"+"} onPress={this._onPlusPress.bind(this)}/>
-        <Text style={styles.textNum}>{this.state.num}</Text>
-        <Button style={styles.button} title={"-"} onPress={this._onMinusPress.bind(this)}/>
-      </View>
+      // 一番上の親コンポーネントをReduxと連携
+      <Provider store={ store }>
+        <View style={styles.container}>
+          <Hello />
+        </View>
+      </Provider>
     );
-  }
-
-  // 「+」ボタン処理
-  _onPlusPress(e) {
-    this.setState({num: this.state.num+1})
-  }
-
-  // 「-」ボタン処理
-  _onMinusPress(e) {
-    this.setState({num: this.state.num-1})
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: 'center',
   },
-  button: {
-    width: 200,
-    height: 100,
-  },
-  textNum: {
-    fontSize: 40,
-  }
 });
+
+export default App;
