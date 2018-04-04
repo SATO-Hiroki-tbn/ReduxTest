@@ -8,6 +8,7 @@ import { styles } from './styles.js';
 import Hello from './Hello.js';
 import CheckScreen from './CheckScreen.js';
 import HomeScreen from './HomeScreen.js';
+import HttpScreen from './HttpScreen.js';
 
 /* 画面を変数で宣言し、コンポーネント(AppNavigator)に保持する
  * key - value で対応
@@ -15,7 +16,8 @@ import HomeScreen from './HomeScreen.js';
 const AppNavigator = StackNavigator({
   Home: {screen: HomeScreen},
   Hello: {screen: Hello},
-  Check: {screen: CheckScreen}
+  Check: {screen: CheckScreen},
+  Http: {screen: HttpScreen}
 });
 
 class App extends Component {

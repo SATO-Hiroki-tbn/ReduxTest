@@ -9,12 +9,14 @@ class HomeScreen extends Component {
 
   render() {
     // 【疑問】navigationのpropsが取得できるのはなぜ？
+    // ⇒親コンポーネントのAppNavigatorのprops？
     const { navigate } = this.props.navigation;
 
     return (
       <View style={styles.container}>
         <Button title="Hello" onPress={ () => navigate('Hello') } />
         <Button title="Check" onPress={ () => navigate('Check') } />
+        <Button title="HTTP API" onPress={ () => navigate('Http') } />
       </View>
     );
   }
